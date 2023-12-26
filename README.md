@@ -8,9 +8,9 @@ e.g.
 generated number is *8413*  
 user input: *1402* - *1* bull & *1* cow (as digit *1* is represented in generated number as well as in the user input but in incorrect order, and digit *4* is both represented and in the right place)
 ### Plan:
-- [ ] **random 4-digit number generation**
-  - [ ] each digit from 0 to 9
-  - [ ] must not contain same digits
+- [x] **random 4-digit number generation**
+  - [x] each digit from 0 to 9
+  - [x] must not contain same digits
 - [ ] **user input**
   - [ ] check for valid number (only 4-digit non-repeating number)
   - [ ] check for bulls and cows
