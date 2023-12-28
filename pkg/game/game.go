@@ -1,7 +1,7 @@
 package game
 
 import (
-	"fmt"
+	"errors"
 	"math/rand"
 	"slices"
 	"strings"
@@ -31,9 +31,9 @@ func validCheck(num string) bool {
 	return true
 }
 
-func BullsAndCows(genNum, userInput string) string {
+func BullsAndCows(genNum, userInput string) (int, int, error) {
 	if !validCheck(userInput) {
-		return "ERROR. It seems like your number is not 4-digit or contains at least 1 repeated digit"
+		return 0, 0, errors.New("error while checking number (perhaps digits are repeated or not 4-digit number is entered")
 	}
 	var bulls, cows int
 	for i, ch := range genNum {
@@ -44,6 +44,5 @@ func BullsAndCows(genNum, userInput string) string {
 			cows++
 		}
 	}
-	res := fmt.Sprintf("Bulls: %v | Cows: %v", bulls, cows)
-	return res
+	return bulls, cows, nil
 }
