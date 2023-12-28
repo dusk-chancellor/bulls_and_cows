@@ -11,11 +11,11 @@ user input: *1402* - *1* bull & *1* cow (as digit *1* is represented in generate
 - [x] **random 4-digit number generation**
   - [x] each digit from 0 to 9
   - [x] must not contain same digits
-- [ ] **user input**
-  - [ ] check for valid number (only 4-digit non-repeating number)
-  - [ ] check for bulls and cows
+- [x] **user input**
+  - [x] check for valid number (only 4-digit non-repeating number)
+  - [x] check for bulls and cows
 - [ ] **multiple user inputs**
-  - [ ] the step **user input** is done for 10 times until user guesses the number
+  - [ ] the step **user input** is done for 10 times until user guesses the number (recursion?)
   - [ ] if user guesses right -> "YOU WON. The number was ()()()()", or if user fails to guess -> () bulls & () cows
   - [ ] optional: user fails to guess in 10 attempts -> "YOU LOST. The number was ()()()()"
 ### Further development:
