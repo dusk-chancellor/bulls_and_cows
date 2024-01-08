@@ -11,7 +11,11 @@ func main() {
 	genNum := game.RandomNumberGenerator()
 	fmt.Println("Enter your first number: ")
 	for i := 1; i <= 10; i++ {
-		ok := game.PlayGame(i, genNum)
+		ok, err := game.PlayGame(i, genNum)
+		if err != nil {
+			fmt.Printf("Try again !\n")
+			i--
+		}
 		if ok {
 			break
 		}
