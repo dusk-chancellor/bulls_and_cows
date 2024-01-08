@@ -1,12 +1,11 @@
-package tests
+package game
 
 import (
-	"github.com/dusk-chancellor/bulls_and_cows/pkg/game"
 	"testing"
 )
 
-func TestRandomNumberGenerator(t *testing.T) {
-	theFunc := game.RandomNumberGeneration()
+func TestRandomNumberGenerator(t *testing.T) { //testing RandomNumberGenerator()
+	theFunc := RandomNumberGenerator()
 	if len(theFunc) != 4 {
 		t.Fatalf("The length of number must be 4, not %v", len(theFunc))
 	}
