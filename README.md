@@ -14,10 +14,10 @@ user input: *1402* - *1* bull & *1* cow (as digit *1* is represented in generate
 - [x] **user input**
   - [x] check for valid number (only 4-digit non-repeating number)
   - [x] check for bulls and cows
-- [ ] **multiple user inputs**
-  - [ ] the step **user input** is done for 10 times until user guesses the number (recursion?)
-  - [ ] if user guesses right -> "YOU WON. The number was ()()()()", or if user fails to guess -> () bulls & () cows
-  - [ ] optional: user fails to guess in 10 attempts -> "YOU LOST. The number was ()()()()"
+- [x] **multiple user inputs**
+  - [x] the step **user input** is done for 10 times until user guesses the number (recursion?)
+  - [x] if user guesses right -> "YOU WON. The number was ()()()()", or if user fails to guess -> () bulls & () cows
+  - [x] optional: user fails to guess in 10 attempts -> "YOU LOST. The number was ()()()()"
 ### Further development:
 * add interface/make interactive (either framework use or html/css)
 * come up with new ideas to improve the game logic
