@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"github.com/dusk-chancellor/bulls_and_cows/pkg/implemented"
 	"log"
 	"math/rand"
 	"os"
@@ -18,12 +19,6 @@ func (e *InputErrors) Error() string { //method
 	return e.Msg
 }
 
-func deleteFunc(slice []string, i int) []string { //deletes fixed element in slice
-	//it is done for further implementations
-	slice = append(slice[:i], slice[i+1:]...)
-	return slice
-}
-
 func RandomNumberGenerator() string { //4-digit random number generator
 	//digits are non-repeated & "0" must be able to stay at the front
 	digits := []string{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
@@ -31,7 +26,7 @@ func RandomNumberGenerator() string { //4-digit random number generator
 	for i := 0; i <= 3; i++ {
 		index := rand.Intn(len(digits))
 		num += digits[index]
-		deleteFunc(digits, index)
+		implemented.DeleteFunc(digits, index)
 	}
 	return num
 }
@@ -48,7 +43,7 @@ func validCheck(num string) error { //checking user input number
 	//4-digit only
 	if len(num) != 4 {
 		return &InputErrors{
-			Msg: fmt.Sprintf("'%v' is not %d-digit number, not 4-digit",
+			Msg: fmt.Sprintf("'%v' is %d-digit number, not 4-digit",
 				num, len(num)),
 		}
 	}
