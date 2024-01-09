@@ -5,11 +5,14 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dusk-chancellor/bulls_and_cows/pkg/implemented"
-	"log"
 	"math/rand"
 	"os"
 	"strings"
 )
+
+type PlayElements struct { //for game elements such as random generated number
+	GenNum string
+}
 
 type InputErrors struct { //struct for checking user input number
 	Msg string
@@ -19,16 +22,16 @@ func (e *InputErrors) Error() string { //method
 	return e.Msg
 }
 
-func RandomNumberGenerator() string { //4-digit random number generator
+func RandomNumberGenerator() *PlayElements { //4-digit random number generator
 	//digits are non-repeated & "0" must be able to stay at the front
 	digits := []string{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
-	var num string
+	var genNum string
 	for i := 0; i <= 3; i++ {
 		index := rand.Intn(len(digits))
-		num += digits[index]
+		genNum += digits[index]
 		implemented.DeleteFunc(digits, index)
 	}
-	return num
+	return &PlayElements{GenNum: genNum}
 }
 
 func validCheck(num string) error { //checking user input number
@@ -68,7 +71,7 @@ func validCheck(num string) error { //checking user input number
 	return nil
 }
 
-func BullsAndCows(genNum, userInput string) (int, int, error) {
+func (pe *PlayElements) BullsAndCows(userInput string) (int, int, error) {
 	//main function of the game - checks if user input number has any bulls and cows
 	//e.g. generated number: 4071 | user input: 1024 | -> '0' is bull, '1' and '4' are cows
 	err := validCheck(userInput)
@@ -81,39 +84,37 @@ func BullsAndCows(genNum, userInput string) (int, int, error) {
 		}
 	}
 	var bulls, cows int
-	for i, ch := range genNum {
-		if genNum[i] == userInput[i] {
+	for i, ch := range pe.GenNum {
+		if pe.GenNum[i] == userInput[i] {
 			bulls++
 		}
-		if strings.ContainsAny(userInput, string(ch)) && genNum[i] != userInput[i] {
+		if strings.ContainsAny(userInput, string(ch)) && pe.GenNum[i] != userInput[i] {
 			cows++
 		}
 	}
 	return bulls, cows, nil
 }
 
-func PlayGame(i int, genNum string) (bool, error) { //handles game in terminal
+func PlayGame(pe *PlayElements, i int) (bool, error) { //handles game in terminal
 	//
 	fmt.Printf("Attempt №%v\n", i)
 	scanner := bufio.NewScanner(os.Stdin)
 	if scanner.Scan() {
 		userInput := scanner.Text()
-		bulls, cows, err := BullsAndCows(genNum, userInput)
+		bulls, cows, err := pe.BullsAndCows(userInput)
 		if err != nil {
 			return false, err
 		}
 
 		switch {
 		case bulls == 4:
-			fmt.Printf("Congratulations, you won! The number was %v!\n", genNum)
+			fmt.Printf("Congratulations, you won! The number was %v!\n", pe.GenNum)
 			return true, nil
 		case i == 10:
-			fmt.Printf("You lost. The number was %v\n", genNum)
+			fmt.Printf("You lost. The number was %v\n", pe.GenNum)
 		default:
 			fmt.Printf("Bulls: %v | Cows: %v\n", bulls, cows)
 		}
-	} else {
-		log.Fatal("an error occurred while handling user input")
 	}
 	return false, nil
 }
